@@ -43,24 +43,24 @@ public class Tests {
   	BPlusTree<Integer, String> tree = new BPlusTree<Integer, String>();
   	Utils.bulkInsert(tree, primeNumbers, primeNumberStrings);
 
-		String test = Utils.outputTree(tree);
-		String correct = "@10/@%%@5/8/@@12/14/@%%[(2,2);(4,4);]#[(5,5);(7,7);]#[(8,8);(9,9);]$[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
-		assertEquals(test, correct);
+	String test = Utils.outputTree(tree);
+	String correct = "@10/@%%@5/8/@@12/14/@%%[(2,2);(4,4);]#[(5,5);(7,7);]#[(8,8);(9,9);]$[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
+	assertEquals(test, correct);
 
-		tree.delete(2);
-		test = Utils.outputTree(tree);
-    correct = "@8/10/12/14/@%%[(4,4);(5,5);(7,7);]#[(8,8);(9,9);]#[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
-    assertEquals(test, correct);
+	tree.delete(2);
+	test = Utils.outputTree(tree);
+	correct = "@8/10/12/14/@%%[(4,4);(5,5);(7,7);]#[(8,8);(9,9);]#[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
+	assertEquals(test, correct);
   }
 	
 	// testing proper leaf node merging behaviour
 	@Test
 	public void testDeleteLeafNodeMerge() {
 		Integer testNumbers[] = new Integer[] { 2, 4, 7, 8, 5, 6, 3 };
-    String testNumberStrings[] = new String[testNumbers.length];
-    for (int i = 0; i < testNumbers.length; i++) {
-      testNumberStrings[i] = (testNumbers[i]).toString();
-    }
+    	String testNumberStrings[] = new String[testNumbers.length];
+    	for (int i = 0; i < testNumbers.length; i++) {
+    		testNumberStrings[i] = (testNumbers[i]).toString();
+    	}
 		BPlusTree<Integer, String> tree = new BPlusTree<Integer, String>();
 		Utils.bulkInsert(tree, testNumbers, testNumberStrings);
 
@@ -78,7 +78,7 @@ public class Tests {
 	//Testing appropriate depth and node invariants on a big tree
   @Test
   public void testLargeTree() {
-    BPlusTree<Integer, Integer> tree = new BPlusTree<Integer, Integer>();
+  	BPlusTree<Integer, Integer> tree = new BPlusTree<Integer, Integer>();
     ArrayList<Integer> numbers = new ArrayList<Integer>(100000);
     for (int i = 0; i<100000; i++) {
       numbers.add(i);
@@ -105,15 +105,15 @@ public class Tests {
   }
   
   public <K extends Comparable<K>, T>  int treeDepth(Node<K,T> node) {
-    if (node.isLeafNode)
-      return 1; 
-    int childDepth = 0;
-    int maxDepth = 0;
-    for (Node<K,T> child : ((IndexNode<K,T>)node).children) {
-      childDepth = treeDepth(child);
-      if (childDepth > maxDepth)
-        maxDepth = childDepth;
-    }
-    return (1 + maxDepth);
+  	if (node.isLeafNode)
+  		return 1; 
+  	int childDepth = 0;
+  	int maxDepth = 0;
+  	for (Node<K,T> child : ((IndexNode<K,T>)node).children) {
+  		childDepth = treeDepth(child);
+  		if (childDepth > maxDepth)
+  			maxDepth = childDepth;
+  	}
+  	return (1 + maxDepth);
   }
 }
