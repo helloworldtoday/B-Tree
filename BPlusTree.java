@@ -13,52 +13,14 @@ import java.util.*;
  */
 public class BPlusTree<K extends Comparable<K>, T> {
 
-	private Entry<K, Node<K,T>> newchildentry;  // the helper entry for insert
-	public Node<K,T> root;
-	public static final int D = 2;
+  private Entry<K, Node<K,T>> newchildentry;  // the helper entry for insert
+  public Node<K,T> root;
+  public static final int D = 2;
 
-	/**
-	 * TODO Search the value for a specific key
-	 * 
-	 * @param key
-	 * @return value
-	 */
-	public T search(K key) {
-		if (root == null || key == null) {
-			return null;
-		}
-		LeafNode<K,T> targetNode = searchLeafNode(key, root);
-		
-		// Search for the key in the leaf Node
-		// Each node has multiple keys, and each key corresponds to one value
-		/* Collections.bianarySearch: 
-		 * Thus, if (index < 0) {return -(index + 1);}
-		 * 		 else {return index + 1;} whcih is the index for the right child
-		 */
-		int index = Collections.binarySearch(targetNode.keys, key);
-		if (index < 0) {
-			return null;
-		}
-		return targetNode.values.get(index);
-	}
-	
-	// Helper method for search the leaf node which may contain the key
-	private LeafNode<K,T> searchLeafNode(K key, Node<K,T> currentNode) {
-		if (currentNode.isLeafNode) {
-			return (LeafNode<K,T>)currentNode;
-		}
-		int index = findKeyIndex(currentNode, key);
-		Node<K,T> child = ((IndexNode<K,T>)currentNode).children.get(index);
-		return searchLeafNode(key, child);
-	}
-		
-	// Helper method for finding the corresponding index for the key
-	private int findKeyIndex(Node<K,T> node , K key) {
-		int index = Collections.binarySearch(node.keys, key) + 1; 
-		// if the key is not accurately matched, let it be one pointer before the insertion point
-		return index < 0 ? -(index) : index;
-		// -(insertion point) - 1
-	}
+  // search
+  public T search(K key) {
+    return (T) new Search(newchildentry, root).search(key);
+  }
 
 	/**
 	 * TODO Insert a key/value pair into the BPlusTree
