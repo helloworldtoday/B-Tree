@@ -11,12 +11,12 @@ import org.junit.Test;
 public class Tests {
 
   // add some nodes, see if it comes out right, delete one, see if it's right
-	@Test
-	public void testHybrid1() {
-		Character alphabet[] = new Character[] { 'a','b','c','d','e','f','g' };
+  @Test
+  public void testHybrid1() {
+    Character alphabet[] = new Character[] { 'a','b','c','d','e','f','g' };
 		String alphabetStrings[] = new String[alphabet.length];
 		for (int i = 0; i < alphabet.length; i++) {
-			alphabetStrings[i] = (alphabet[i]).toString();
+		  alphabetStrings[i] = (alphabet[i]).toString();
 		}
 		BPlusTree<Character, String> tree = new BPlusTree<Character, String>();
 		Utils.bulkInsert(tree, alphabet, alphabetStrings);
@@ -29,38 +29,38 @@ public class Tests {
 
 		test = Utils.outputTree(tree);
 		correct = "@e/@%%[(b,b);(c,c);(d,d);]#[(e,e);(f,f);(g,g);]$%%";
-  	assertEquals(correct, test);
+    assertEquals(correct, test);
 	}
 
   // add some nodes, see if it comes out right, delete one, see if it's right
   @Test
   public void testHybrid2() {
-  	Integer primeNumbers[] = new Integer[] { 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    Integer primeNumbers[] = new Integer[] { 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
   	String primeNumberStrings[] = new String[primeNumbers.length];
   	for (int i = 0; i < primeNumbers.length; i++) {
   		primeNumberStrings[i] = (primeNumbers[i]).toString();
   	}
   	BPlusTree<Integer, String> tree = new BPlusTree<Integer, String>();
   	Utils.bulkInsert(tree, primeNumbers, primeNumberStrings);
+    
+    String test = Utils.outputTree(tree);
+    String correct = "@10/@%%@5/8/@@12/14/@%%[(2,2);(4,4);]#[(5,5);(7,7);]#[(8,8);(9,9);]$[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
+    assertEquals(test, correct);
 
-	String test = Utils.outputTree(tree);
-	String correct = "@10/@%%@5/8/@@12/14/@%%[(2,2);(4,4);]#[(5,5);(7,7);]#[(8,8);(9,9);]$[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
-	assertEquals(test, correct);
-
-	tree.delete(2);
-	test = Utils.outputTree(tree);
-	correct = "@8/10/12/14/@%%[(4,4);(5,5);(7,7);]#[(8,8);(9,9);]#[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
-	assertEquals(test, correct);
+    tree.delete(2);
+    test = Utils.outputTree(tree);
+    correct = "@8/10/12/14/@%%[(4,4);(5,5);(7,7);]#[(8,8);(9,9);]#[(10,10);(11,11);]#[(12,12);(13,13);]#[(14,14);(15,15);(16,16);]$%%";
+    assertEquals(test, correct);
   }
 	
 	// testing proper leaf node merging behaviour
 	@Test
 	public void testDeleteLeafNodeMerge() {
 		Integer testNumbers[] = new Integer[] { 2, 4, 7, 8, 5, 6, 3 };
-    	String testNumberStrings[] = new String[testNumbers.length];
-    	for (int i = 0; i < testNumbers.length; i++) {
-    		testNumberStrings[i] = (testNumbers[i]).toString();
-    	}
+    String testNumberStrings[] = new String[testNumbers.length];
+    for (int i = 0; i < testNumbers.length; i++) {
+    	testNumberStrings[i] = (testNumbers[i]).toString();
+    }
 		BPlusTree<Integer, String> tree = new BPlusTree<Integer, String>();
 		Utils.bulkInsert(tree, testNumbers, testNumberStrings);
 
@@ -112,7 +112,7 @@ public class Tests {
   	for (Node<K,T> child : ((IndexNode<K,T>)node).children) {
   		childDepth = treeDepth(child);
   		if (childDepth > maxDepth)
-  			maxDepth = childDepth;
+        maxDepth = childDepth;
   	}
   	return (1 + maxDepth);
   }
