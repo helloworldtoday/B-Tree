@@ -13,10 +13,10 @@ public class Tests {
   // add some nodes, see if it comes out right, delete one, see if it's right
   @Test
   public void testHybrid1() {
-    Character alphabet[] = new Character[] { 'a','b','c','d','e','f','g' };
-		String alphabetStrings[] = new String[alphabet.length];
-		for (int i = 0; i < alphabet.length; i++) {
-		  alphabetStrings[i] = (alphabet[i]).toString();
+  	Character alphabet[] = new Character[] { 'a','b','c','d','e','f','g' };
+  	String alphabetStrings[] = new String[alphabet.length];
+    for (int i = 0; i < alphabet.length; i++) {
+    	alphabetStrings[i] = (alphabet[i]).toString();
 		}
 		BPlusTree<Character, String> tree = new BPlusTree<Character, String>();
 		Utils.bulkInsert(tree, alphabet, alphabetStrings);
@@ -29,7 +29,7 @@ public class Tests {
 
 		test = Utils.outputTree(tree);
 		correct = "@e/@%%[(b,b);(c,c);(d,d);]#[(e,e);(f,f);(g,g);]$%%";
-    assertEquals(correct, test);
+		assertEquals(correct, test);
 	}
 
   // add some nodes, see if it comes out right, delete one, see if it's right
