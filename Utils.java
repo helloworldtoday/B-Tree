@@ -18,8 +18,8 @@ public class Utils {
   public static <K extends Comparable<K>, T> void bulkInsert(BPlusTree<K,T> b, K[] tests, T[] testValues) {
     for (int i = 0; i < tests.length; i++) {
       b.insert(tests[i], testValues[i]);
-		}
-	}
+    }
+  }
 	
   public static <K extends Comparable<K>,T> String 
     outputTree(BPlusTree<K,T> tree) {
