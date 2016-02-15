@@ -21,6 +21,7 @@ public class FindKeyIndex<K extends Comparable<K>, T> {
   public int find() {
     int index = Collections.binarySearch(currentNode.keys, key) + 1; 
     // if the key is not accurately matched, let it be one pointer before the insertion point
+    
     return index < 0 ? -(index) : index; // -(insertion point) - 1
   }
 }
